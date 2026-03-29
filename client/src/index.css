@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
+a {
+  text-decoration: none;
+  color: #1a73e8;
+}
+/*nav a { padding: 4px 8px; border-radius: 6px; }
+nav a:hover { background: #eef3fe; }        Commented to change the hover effect of the nav bar Juan Diaz 10/11*/
+button {
+  cursor: pointer;
+}
+
+.app-nav a {
+  color: #111;
+  text-decoration: none;
+  /*padding: 0;
+  border-radius: 0;*/
+}
+
+.app-nav a:hover {
+  background: transparent;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.app-nav .nav-link {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease,
+    transoform 0.12s ease;
+}
+
+.app-nav .nav-link:hover {
+  background: #eef3fe;
+  border-color: #b4b8c0;
+  transform: translateY(-1px);
+}
+
+.app-nav .brand-link {
+  cursor: pointer;
+}
+
+.app-nav .brand-link:hover {
+  opacity: 0.8;
+}
+
+.app-nav .nav-link:hover {
+  text-decoration: underline;
+}
+
+.app-nav .brand-link:focus-visible .app-nav .nav-link:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
