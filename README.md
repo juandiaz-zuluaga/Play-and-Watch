@@ -30,7 +30,11 @@ Overall, around 80% of my work was on the frontend, and the remaining 20% involv
 **Database**
 - SQLite
 
-##Project Structure
+**APIs**
+- TMBD API (Movies)
+- IGDB API (Games)
+
+## Project Structure
 -client/ - Frontend (Readt app)
 -server/ - Backend (API + database)
 
@@ -50,4 +54,12 @@ Overall, around 80% of my work was on the frontend, and the remaining 20% involv
 - npm install
 - npm run dev
 
+## Screenshots
 
+## Homepage
+![Home](<img width="956" height="454" alt="homepage" src="https://github.com/user-attachments/assets/1f936eb2-5f39-4c85-bc73-ab78a4896602" />
+)
+
+## Preferences page
+![Preferences](<img width="959" height="455" alt="Preferences page" src="https://github.com/user-attachments/assets/7355825f-165d-49e9-a507-ea5097ab18e6" />
+)
