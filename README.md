@@ -57,9 +57,8 @@ Overall, around 80% of my work was on the frontend, and the remaining 20% involv
 ## Screenshots
 
 ## Homepage
-![Home](<img width="956" height="454" alt="homepage" src="https://github.com/user-attachments/assets/1f936eb2-5f39-4c85-bc73-ab78a4896602" />
-)
+<img width="956" height="454" alt="homepage" src="https://github.com/user-attachments/assets/b9fd962d-fd48-4d55-8530-61fcc4369ea1" />
 
 ## Preferences page
-![Preferences](<img width="959" height="455" alt="Preferences page" src="https://github.com/user-attachments/assets/7355825f-165d-49e9-a507-ea5097ab18e6" />
-)
+<img width="959" height="455" alt="Preferences page" src="https://github.com/user-attachments/assets/78aecd26-2153-4538-bc8a-d2e6cca7545b" />
+
