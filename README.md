@@ -1,42 +1,53 @@
-# Play&Watch (Skeleton + US-1)
+# Play&Watch
 
-This repository contains a minimal full‑stack skeleton for **Play&Watch** plus **US‑1 (Signup/Login)** implemented as a mock.
+## About the Project
+Play & Watch is a web application that helps users discover movies and video games based on their preferences and mood. The idea behind the project is to make it easier for people to find something to watch or play without spending too much time searching.
 
-## Stack
-- Frontend: React (Vite), JS, React Router
-- Backend: Node.js + Express (ES modules)
-- Data: in‑memory mock objects (replace with DB later)
+This project was developed as part of a Capstone 1 course and focuses on building a full-stack application with a clean and simple user experience.
 
-## Run locally
-Open two terminals in VS Code:
+## Team Contribution
+This project was developed as part of a Capstone I course and was completed in a team of students. Although it was a collaborative effort, my main contributions were focused on the frontend and overall UI/UX design of the application.
+I was responsible for designing and implementing most of the user interface, ensuring a clean and user-friendly experience. In addition, I contributed to some parts of the backend, mainly helping with API integration and connecting the frontend with the server.
+Overall, around 80% of my work was on the frontend, and the remaining 20% involved backend-related tasks. This project helped me gain experience working in a team environment, dividing responsibilities, and integrating different parts of a full-stack application.
 
-### API
-```bash
-cd server
-npm install
-npm run dev
-# http://localhost:4000/api/health
-```
+## Features
+- User authentication (register/login)
+- Personalized recommendations based on preferences
+- Ability to save favorites and watched items
+- Mood-based filtering system
+- Clean and responsive UI
+- 
+## Tech Stack
+**Frontend**
+- React (Vite)
+- JavaScript
+- CSS
 
-### Web
-```bash
-cd client
-npm install
-npm run dev
-# http://localhost:5173
-```
+**Backend**
+- Node.js
+- Express
 
-## VS Code helpers
-- `.vscode/tasks.json` → run both with **Terminal ▸ Run Task ▸ dev:both**
-- `.vscode/launch.json` → **Run ▸ Start Debugging ▸ Run Full Stack**
+**Database**
+- SQLite
 
-## Endpoints (mock)
-- `POST /api/auth/signup` { email, password }
-- `POST /api/auth/login` { email, password }
-- `POST /api/preferences/:userId`
-- `GET /api/preferences/:userId`
-- `GET /api/recommendations/:userId`
-- `POST /api/user/:userId/watched/:itemId`
-- `POST /api/user/:userId/favorites/:itemId`
+##Project Structure
+-client/ - Frontend (Readt app)
+-server/ - Backend (API + database)
 
-> Note: Authentication is intentionally simple for Sprint 1. Replace with real auth (JWT + DB) in a later sprint.
+## How to Run the Project
+
+### 1. Clone the repository
+- git clone https://github.com/juandiaz-zuluaga/Play-and-Watch.git
+- cd Play-and-Watch
+
+## Run the Backend
+- cd server
+- npm install
+- npm run dev
+
+## Run the Frontend
+- cd client
+- npm install
+- npm run dev
+
+
