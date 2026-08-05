@@ -1,7 +1,13 @@
 //TMDB API Service
-const API_KEY = "b98260293b8dcf13c5a9a67f90fbd3f0"; //API key
+const API_KEY = process.env.TMDB_API_KEY;
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"; //Poster Images
+
+if (!API_KEY) {
+  console.error(
+    "Missing TMDB_API_KEY environment variable. Movie/show recommendations will fail until this is set.",
+  );
+}
 
 /**
  * Makes a reqeust to the TMDB API
@@ -116,7 +122,7 @@ export async function fetchMoviesByPreferences(preferences) {
     }
 
     console.log(
-      `Fetched movies:, ${allMovies.length} movies from TMDB ${pagesToFetch} pages`
+      `Fetched movies:, ${allMovies.length} movies from TMDB ${pagesToFetch} pages`,
     );
   } catch (error) {
     console.error("Error fetching movies by preferences:", error);
@@ -206,7 +212,7 @@ export async function fetchShowsByPreferences(preferences) {
     }
 
     console.log(
-      `Fetched ${allShows.length} shows from TMDB (${pagesToFetch} pages)`
+      `Fetched ${allShows.length} shows from TMDB (${pagesToFetch} pages)`,
     );
 
     if (
@@ -215,7 +221,7 @@ export async function fetchShowsByPreferences(preferences) {
       params.with_genres.includes(`,`)
     ) {
       console.log(
-        "No shows found with selected genres, retrying with single genre..."
+        "No shows found with selected genres, retrying with single genre...",
       );
       params.with_genres = params.with_genres.split(`,`)[0]; //Use only first genre
       console.log(`Retrying with genre: ${params.with_genres}`);
@@ -245,7 +251,7 @@ export async function fetchShowsByPreferences(preferences) {
         }
       }
       console.log(
-        `fetched ${allShows.length} shows from TMDB after retrying with single genre.`
+        `fetched ${allShows.length} shows from TMDB after retrying with single genre.`,
       );
     }
   } catch (error) {

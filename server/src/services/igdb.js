@@ -1,9 +1,47 @@
 //IGDB API Service
-const CLIENT_ID = "opvllo8a242300u19t5z8d3sn3yyup"; //From Twitch dev console
-const ACCESS_TOKEN = "kwnl2z84n1v8l3zh8tmf4en26hmf30";
+const CLIENT_ID = process.env.IGDB_CLIENT_ID;
+const CLIENT_SECRET = process.env.IGDB_CLIENT_SECRET;
 
 const BASE_URL = "https://api.igdb.com/v4";
 const IMAGE_BASE_URL = "https://images.igdb.com/igdb/image/upload/t_cover_big"; //For game cover images
+
+if (!CLIENT_ID || !CLIENT_SECRET) {
+  console.error(
+    "Missing IGDB_CLIENT_ID / IGDB_CLIENT_SECRET environment variables. Game recommendations will fail until these are set.",
+  );
+}
+
+// IGDB runs on Twitch's OAuth. Access tokens expire (~60 days), so instead of
+// hardcoding one, we fetch a fresh token from Twitch and cache it in memory,
+// automatically requesting a new one once it's close to expiring.
+let cachedToken = null;
+let tokenExpiresAt = 0; // epoch ms
+
+async function getAccessToken() {
+  const now = Date.now();
+
+  // Reuse the cached token if it's still valid (with a 60s safety buffer)
+  if (cachedToken && now < tokenExpiresAt - 60_000) {
+    return cachedToken;
+  }
+
+  console.log("Requesting a fresh IGDB/Twitch access token...");
+  const url = `https://id.twitch.tv/oauth2/token?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&grant_type=client_credentials`;
+
+  const response = await fetch(url, { method: "POST" });
+  if (!response.ok) {
+    throw new Error(`Failed to get Twitch access token: ${response.status}`);
+  }
+
+  const data = await response.json();
+  cachedToken = data.access_token;
+  tokenExpiresAt = now + data.expires_in * 1000;
+
+  console.log(
+    `Got new IGDB access token, valid for ~${Math.round(data.expires_in / 86400)} days.`,
+  );
+  return cachedToken;
+}
 
 /**
  * Fetches games from IGDB based on a search query.
@@ -14,6 +52,7 @@ const IMAGE_BASE_URL = "https://images.igdb.com/igdb/image/upload/t_cover_big"; 
 
 async function igdbRequest(endpoint, query) {
   try {
+    const accessToken = await getAccessToken();
     const url = `${BASE_URL}/${endpoint}`;
     console.log(`IGDB Request: ${endpoint}`);
     console.log(`IGDB Query: ${query}`);
@@ -22,7 +61,7 @@ async function igdbRequest(endpoint, query) {
       method: "POST",
       headers: {
         "Client-ID": CLIENT_ID,
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "text/plain",
       },
       body: query,
@@ -57,7 +96,7 @@ export async function fetchGamesByPreferences(preferences) {
 
     //Base fields we want to fetch
     queryParts.push(
-      "fields name, cover.url, genres.name, platforms.name, release_dates.y, total_rating, summary, game_modes.name;"
+      "fields name, cover.url, genres.name, platforms.name, release_dates.y, total_rating, summary, game_modes.name;",
     );
 
     //Build WHERE clauses based on preferences

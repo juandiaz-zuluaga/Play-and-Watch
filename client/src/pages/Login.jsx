@@ -38,6 +38,19 @@ export default function Login() {
     }
   };
 
+  //Lets a visitor skip creating an account and try the app right away.
+  //Generates a temporary guest ID (same shape as a real signup ID) so the
+  //rest of the app — preferences, recommendations, watchlist — works
+  //exactly the same way it would for a registered user, with no backend
+  //changes needed.
+  const continueAsGuest = () => {
+    const guestId = Date.now().toString();
+    localStorage.setItem("userId", guestId);
+    localStorage.setItem("userEmail", "guest@playwatch.demo");
+    localStorage.setItem("userName", "Guest");
+    navigate("/preferences"); //Send guests straight into the normal flow
+  };
+
   return (
     //Main container
     <div style={styles.container}>
@@ -100,6 +113,12 @@ export default function Login() {
           </Link>
         </div>
       </div>
+
+      {/*Guest access — lets recruiters/visitors try the app instantly
+          without creating an account */}
+      <button onClick={continueAsGuest} style={styles.guestButton}>
+        Continue as Guest
+      </button>
     </div>
   );
 }
@@ -211,5 +230,20 @@ const styles = {
     color: "#0066cc",
     textDecoration: "none",
     fontWeight: "500",
+  },
+
+  //Continue as Guest button — sits below the login box, intentionally
+  //understated so it doesn't compete visually with the real login button
+  guestButton: {
+    marginTop: 16,
+    width: "400px",
+    padding: "14px",
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#000",
+    backgroundColor: "#fff",
+    border: "2px solid #000",
+    borderRadius: 4,
+    cursor: "pointer",
   },
 };
