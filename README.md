@@ -1,5 +1,7 @@
 # Play&Watch
 
+Link: play-and-watch.vercel.app 
+
 ## About the Project
 Play & Watch is a web application that helps users discover movies and video games based on their preferences and mood. The idea behind the project is to make it easier for people to find something to watch or play without spending too much time searching.
 
